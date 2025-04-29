@@ -1,4 +1,5 @@
 import random
+import math
 import copy
 
 def sample(arraylike, n, replace = True):
@@ -10,4 +11,7 @@ def sample(arraylike, n, replace = True):
         if not replace:
             arrCopy.pop(index)
     return output
+
+def nCr(n, r):
+    return (math.factorial(n) / (math.factorial(r) * math.factorial(n-r)))
            
