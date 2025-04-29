@@ -17,5 +17,7 @@ def nCr(n, r):
     return (math.factorial(n) / (math.factorial(r) * math.factorial(n-r)))
 
 def get_combinations(arraylike, r):
-    return list(iter.combinations(arraylike, r))
+    x = list(iter.combinations(arraylike, r))
+    x = [list(y) for y in x]
+    return x
            
