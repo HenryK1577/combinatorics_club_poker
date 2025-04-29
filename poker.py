@@ -138,9 +138,51 @@ def is_royalflush(hand):
         if (arrCopy == [10,11,12,13,14]):
             return True
 
+#Returns True if the hand's best scoring is a high card. Works for numeric hands
+def is_highcard(hand):
+    return not(has_pair(hand) or has_straight(hand) or has_flush(hand))
+
 #Randomly draws hands of size N from deck until conditional_func returns true
 def seek_handtype(deck, conditional_func, N = 5):
     hand = draw_N(deck, N)
     while not conditional_func(hand):
           hand = draw_N(deck, N)
     return hand
+
+#Returns the highest score a hand can make
+#1 - High Card | 2 - Pair | 3 - Two Pair | 4 - Three Kind
+#5 - Straight | 6 - Flush | 7 - Full House | 8 - Four kind
+#9 - Straight Flush | 10 - Royal Flush
+def get_highest_score(hand):
+    if is_highcard(hand):
+        return 1
+    elif has_pair(hand, True):
+        return 2
+    elif has_twopair(hand, True):
+        return 3
+    elif has_threekind(hand, True):
+        return 4
+    elif has_straight(hand, True):
+        return 5
+    elif has_flush(hand, True):
+        return 6
+    elif is_full(hand):
+        return 7
+    elif is_fourkind(hand):
+        return 8
+    elif has_straightflush(hand, True):
+        return 9
+    elif is_royalflush(hand):
+        return 10
+    else:
+        return -1
+
+#Returns an array representing the occurences of hands in an array of hands
+def analyze_hands(handarray):
+    occurences = [0] * 10
+
+    for hand in handarray:
+        occurences[get_highest_score(hand) -1] += 1
+
+    return occurences
+
