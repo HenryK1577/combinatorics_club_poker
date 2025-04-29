@@ -1,6 +1,7 @@
 import random
 import math
 import copy
+import itertools as iter
 
 def sample(arraylike, n, replace = True):
     arrCopy = copy.copy(arraylike)
@@ -14,4 +15,7 @@ def sample(arraylike, n, replace = True):
 
 def nCr(n, r):
     return (math.factorial(n) / (math.factorial(r) * math.factorial(n-r)))
+
+def get_combinations(arraylike, r):
+    return list(iter.combinations(arraylike, r))
            
